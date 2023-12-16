@@ -164,7 +164,7 @@ bnb_config = BitsAndBytesConfig(
 
 base_model = AutoModelForCausalLM.from_pretrained(
     script_args.model_name,
-    quantization_config=bnb_config,
+    # quantization_config=bnb_config,
     device_map={"": Accelerator().local_process_index},
     trust_remote_code=True,
     use_auth_token=True,
@@ -204,7 +204,7 @@ if is_xpu_available():
 else:
     torch.cuda.empty_cache()
 
-model = AutoPeftModelForCausalLM.from_pretrained(output_dir, device_map="auto", torch_dtype=torch.bfloat16)
+model = AutoPeftModelForCausalLM.from_pretrained(output_dir, device_map="auto", torch_dtype=torch.bfloat16, trust_remote_code=True)
 model = model.merge_and_unload()
 
 output_merged_dir = os.path.join(script_args.training_args.output_dir, "final_merged_checkpoint")

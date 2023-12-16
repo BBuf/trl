@@ -128,7 +128,7 @@ if __name__ == "__main__":
         script_args.model_name_or_path,
         low_cpu_mem_usage=True,
         torch_dtype=torch.float16,
-        load_in_4bit=True,
+        trust_remote_code=True,
     )
     model.config.use_cache = True
 
@@ -142,9 +142,9 @@ if __name__ == "__main__":
         script_args.model_name_or_path,
         low_cpu_mem_usage=True,
         torch_dtype=torch.float16,
-        load_in_4bit=True,
+        trust_remote_code=True,
     )
-    tokenizer = AutoTokenizer.from_pretrained("RWKV/rwkv-5-world-1b5")
+    tokenizer = AutoTokenizer.from_pretrained("RWKV/rwkv-5-world-1b5", trust_remote_code=True)
     tokenizer.pad_token = tokenizer.eos_token
     tokenizer.padding_side = "left"  # Fix weird overflow issue with fp16 training
 
