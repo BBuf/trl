@@ -181,7 +181,7 @@ if __name__ == "__main__":
         optim=script_args.optimizer_type,
         bf16=True,
         remove_unused_columns=False,
-        run_name="dpo_llama2",
+        run_name="dpo_rwkv5",
     )
 
     peft_config = LoraConfig(
